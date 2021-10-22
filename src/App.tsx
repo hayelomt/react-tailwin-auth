@@ -1,5 +1,5 @@
 import { CssBaseline } from '@mui/material';
-import RouterManager from './common/RouterManager';
+import RouterManager from './app/RouterManager';
 
 function App() {
   return (

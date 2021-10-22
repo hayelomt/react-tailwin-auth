@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './login.css';
-import { auth } from '../../../common/services/firebase';
-import authService from '../services/authService';
-import { logger } from '../../../common/utils/logger';
+import authService from '../../services/authService';
+import { logger } from '../../../../common/utils/logger';
+import { auth } from '../../../../common/services/firebase';
+
 function Login() {
   const history = useHistory();
 

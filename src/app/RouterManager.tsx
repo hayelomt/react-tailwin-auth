@@ -1,18 +1,18 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Login from '../features/auth/login/Login';
+import LoginScreen from '../features/auth/login/LoginScreen';
 import Register from '../features/auth/register/Register';
-import Dash from '../features/test/Dash';
-import Home from '../features/test/Home';
 import Dashboard from '../features/user/dashboard/Dashboard';
+import HomeScreen from '../features/home/HomeScreen';
+import DashboardScreen from '../features/user/dashboard/DashboardScreen';
 
 const RouterManager = () => {
   return (
     <>
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/dash" component={Dash} />
+          <Route exact path="/" component={HomeScreen} />
+          <Route exact path="/login" component={LoginScreen} />
+          <Route exact path="/dash" component={DashboardScreen} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
