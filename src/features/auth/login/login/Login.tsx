@@ -1,31 +1,43 @@
-import { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import './login.css';
+import {
+  useEffect,
+  useState,
+  //  useState
+} from 'react';
+import { useHistory } from 'react-router-dom';
 import authService from '../../services/authService';
+import { useAppSelector } from '../../../../app/hooks';
+import { authSelector } from '../../authSlice';
 import { logger } from '../../../../common/utils/logger';
-import { auth } from '../../../../common/services/firebase';
+import Loading from '../../../../common/components/loading/Loading';
+import './login.css';
 
 function Login() {
   const history = useHistory();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [user, loading] = useAuthState(auth);
+  const [loggingIn, setLoggingIn] = useState(false);
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  const { isAuthenticated, loading } = useAppSelector(authSelector);
 
   useEffect(() => {
-    if (loading) {
-      // maybe trigger a loading screen
-      return;
+    if (isAuthenticated) {
+      history.replace('/');
     }
-    logger(`User`, user);
-    if (user) history.replace('/dashboard');
-  }, [user, loading, history]);
+  }, [isAuthenticated, history]);
+  logger('Login.tsx Is Auth ', isAuthenticated, loading);
+
+  const handleAnon = async () => {
+    setLoggingIn(true);
+    await authService.signInAnon();
+    setLoggingIn(false);
+  };
+
+  if (loading) return <Loading />;
 
   return (
     <div className="login">
       <div className="login__container">
-        <input
+        {/* <input
           type="text"
           className="login__textBox"
           value={email}
@@ -50,19 +62,13 @@ function Login() {
           onClick={authService.signInGoogle}
         >
           Login with Google
-        </button>
-        <button
-          className="login__btn login__google"
-          onClick={authService.signInAnon}
-        >
+        </button> */}
+        <button disabled={loggingIn} onClick={handleAnon}>
           Login Anon
         </button>
-        <div>
-          <Link to="/reset">Forgot Password</Link>
-        </div>
-        <div>
+        {/* <div>
           Don't have an account? <Link to="/register">Register</Link> now.
-        </div>
+        </div> */}
       </div>
     </div>
   );

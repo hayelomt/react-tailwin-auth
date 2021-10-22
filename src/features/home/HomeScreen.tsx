@@ -1,12 +1,13 @@
 import Layout from '../../common/components/layout/Layout';
-import AuthWrapper from '../auth/components/AuthWrapper';
+import authService from '../auth/services/authService';
 
 const HomeScreen = () => {
   return (
     <>
-      <AuthWrapper>
-        <Layout>Home Screen</Layout>
-      </AuthWrapper>
+      <Layout>
+        <p>Home Screen</p>
+        <button onClick={authService.logOut}>Sign Out</button>
+      </Layout>
     </>
   );
 };

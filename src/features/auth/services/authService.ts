@@ -5,9 +5,11 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  User as FirebaseUser,
 } from 'firebase/auth';
 import { auth } from '../../../common/services/firebase';
 import { logError, logger } from '../../../common/utils/logger';
+import { User } from './authTypes';
 const googleProvider = new GoogleAuthProvider();
 
 const signInGoogle = async () => {
@@ -50,12 +52,18 @@ const signInAnon = async () => {
 
 const logOut = async () => signOut(auth);
 
+const mapFirebaseUser = (user: FirebaseUser): User => ({
+  email: user.email || '',
+  uid: user.uid,
+});
+
 const authService = {
   signInAnon,
   signInEmailPassword,
   signInGoogle,
   registerUser,
   logOut,
+  mapFirebaseUser,
 };
 
 export default authService;

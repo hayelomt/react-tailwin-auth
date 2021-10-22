@@ -1,5 +1,14 @@
+import Layout from '../../../common/components/layout/Layout';
+import Login from './login/Login';
+
 const LoginScreen = () => {
-  return <>Login Screen</>;
+  return (
+    <>
+      <Layout>
+        <Login />
+      </Layout>
+    </>
+  );
 };
 
 export default LoginScreen;

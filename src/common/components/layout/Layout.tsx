@@ -12,7 +12,7 @@ const Layout = ({ children }: ReactChildren) => {
           <Link to="/login">Login</Link>
         </span>
         <span>
-          <Link to="/dash">Dash</Link>
+          <Link to="/dash">DashBoard</Link>
         </span>
       </div>
       {children}
